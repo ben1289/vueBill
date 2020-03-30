@@ -1,5 +1,5 @@
 <template>
-    <div style="height: inherit">
+    <div>
         <van-nav-bar :border="false">
             <template #title><img src="../assets/logo_long.png" style="padding-top: 20px;" alt=""></template>
         </van-nav-bar>
@@ -124,11 +124,13 @@
                 .then(response => {
                     if (response.status === 200) {
                         // 将用户存储在本地
+                        response.data.password = params.password;
                         localStorage.setItem("user", JSON.stringify(response.data));
                         // 将用户存储在store
+                        this.$store.setIsLoginAction(true);
                         this.$store.setUserAction(response.data);
-                        const redirect = this.$route.query.redirect ? this.$route.query.redirect : "/home";
-                        this.$router.push({path: redirect});
+                        const redirect = this.$route.query.redirect ? this.$route.query.redirect : "/detail";
+                        this.$router.replace({path: redirect});
                     }
                 })
                 .catch(error => {
@@ -221,5 +223,15 @@
         font-size: 14px;
         font-weight: 500;
         color: #6083B8;
+    }
+    div >>> .van-nav-bar {
+        height: 74px;
+        line-height: 74px;
+    }
+    .van-tabs >>> .van-tabs__wrap {
+        margin-bottom: 60px;
+    }
+    .van-tabs >>> .van-tabs__content {
+        height: inherit;
     }
 </style>
