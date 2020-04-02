@@ -1,7 +1,7 @@
 <template>
     <div>
         <van-nav-bar :border="false">
-            <template #title><img src="../assets/logo_long.png" style="padding-top: 20px;" alt=""></template>
+            <template #title><img src="../assets/images/logo_long.png" style="padding-top: 20px;" alt=""></template>
         </van-nav-bar>
         <van-tabs
                 style="height: inherit"
@@ -28,7 +28,13 @@
                             size="large"
                     />
                     <div style="margin: 16px; text-align: center">
-                        <van-button class="button-radius" square block :disabled="loginDisabled" color="linear-gradient(to right, #4bb0ff, #6149f6)" native-type="submit">
+                        <van-button class="button-radius"
+                                    :disabled="loginDisabled"
+                                    color="linear-gradient(to right, #4bb0ff, #6149f6)"
+                                    native-type="submit"
+                                    square
+                                    block
+                        >
                             登录
                         </van-button>
                         <a class="tag-a">忘记密码</a>
@@ -87,7 +93,13 @@
                             required
                     />
                     <div style="margin: 16px;">
-                        <van-button class="button-radius" square block :disabled="registerDisabled" color="linear-gradient(to right, #4bb0ff, #6149f6)" native-type="submit">
+                        <van-button class="button-radius"
+                                    :disabled="registerDisabled"
+                                    color="linear-gradient(to right, #4bb0ff, #6149f6)"
+                                    native-type="submit"
+                                    square
+                                    block
+                        >
                             注册
                         </van-button>
                     </div>

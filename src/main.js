@@ -5,8 +5,8 @@ import axios from 'axios'
 import qs from 'qs'
 import {Notify, Toast} from 'vant'
 import { Col, Row, Field, Button, Form, Tab, Tabs, NavBar, Tabbar, TabbarItem, Icon, DropdownMenu, DropdownItem,
-  DatetimePicker, List, Cell } from 'vant';
-import './font/iconfont/iconfont.css'
+  DatetimePicker, List, Cell, Grid, GridItem, NumberKeyboard, Popup } from 'vant';
+import './assets/css/iconfont.css'
 
 Vue.config.productionTip = true;
 
@@ -32,6 +32,10 @@ Vue.use(DropdownItem);
 Vue.use(DatetimePicker);
 Vue.use(List);
 Vue.use(Cell);
+Vue.use(Grid);
+Vue.use(GridItem);
+Vue.use(NumberKeyboard);
+Vue.use(Popup);
 
 /*路由守卫 如果未登录则跳到/login*/
 router.beforeEach((to, from, next) => {
@@ -80,6 +84,13 @@ let store = {
   setCurrentDate(currentDate) {
     if (this.debug) console.log('setCurrentDate triggered with', currentDate);
     this.state.currentDate = currentDate;
+  },
+  format(date) {
+    let month = (date.getMonth() + 1).toString();
+    month = month.length < 2 ? `0${month}` : month;
+    let day = date.getDay().toString();
+    day = day.length < 2 ? `0${date.getDay()}` : date.getDay();
+    return `${date.getFullYear()}-${month}-${day}`;
   }
 };
 Vue.prototype.$store = store;

@@ -33,9 +33,10 @@
                         <span class="amount">支出：{{list['expend']}}</span>
                     </van-cell>
                     <van-cell
-                            :class="`cell-body iconfont ${item.icon}`"
                             v-for="(item, key) in list.details"
                             :key="key"
+                            icon-prefix="iconfont"
+                            :icon="item.icon"
                             :title="item['remark']"
                             size="large"
                     >
@@ -150,8 +151,5 @@
     .amount {
         width: 50%;
         display: inline-block;
-    }
-    .cell-body >>> .van-cell__title {
-        margin-left: 10px;
     }
 </style>
