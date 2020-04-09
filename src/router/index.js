@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from "@/views/Login";
-import Detail from "@/views/Detail";
+import Details from "@/views/Details";
 import Chart from "@/views/Chart";
 import Bookkeeping from "@/views/Bookkeeping";
 import Bill from "@/views/Bill";
 import Mine from "@/views/Mine";
+import Detail from "@/views/Detail";
 
 Vue.use(VueRouter);
 
@@ -14,7 +15,7 @@ export default new VueRouter({
         {
             // 设置默认路由
             path: '*',
-            redirect: {name: 'detail'}
+            redirect: {name: 'details'}
         },
         {
             path: '/login',
@@ -22,9 +23,9 @@ export default new VueRouter({
             component: Login
         },
         {
-            path: '/detail',
-            name: 'detail',
-            component: Detail,
+            path: '/details',
+            name: 'details',
+            component: Details,
             meta: {requiresAuth: true}
         },
         {
@@ -49,6 +50,12 @@ export default new VueRouter({
             path: '/mine',
             name: 'mine',
             component: Mine,
+            meta: {requiresAuth: true}
+        },
+        {
+            path: '/detail',
+            name: 'detail',
+            component: Detail,
             meta: {requiresAuth: true}
         }
     ]

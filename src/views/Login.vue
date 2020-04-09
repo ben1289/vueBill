@@ -133,21 +133,21 @@
             /*登录*/
             login(params) {
                 this.$axios.post("/login", this.$qs.stringify(params))
-                .then(response => {
-                    if (response.status === 200) {
-                        // 将用户存储在本地
-                        response.data.password = params.password;
-                        localStorage.setItem("user", JSON.stringify(response.data));
-                        // 将用户存储在store
-                        this.$store.setIsLoginAction(true);
-                        this.$store.setUserAction(response.data);
-                        const redirect = this.$route.query.redirect ? this.$route.query.redirect : "/detail";
-                        this.$router.replace({path: redirect});
-                    }
-                })
-                .catch(error => {
-                    console.log(error);
-                })
+                    .then(response => {
+                        if (response.status === 200) {
+                            // 将用户存储在本地
+                            response.data.password = params.password;
+                            localStorage.setItem("user", JSON.stringify(response.data));
+                            // 将用户存储在store
+                            this.$store.setIsLoginAction(true);
+                            this.$store.setUserAction(response.data);
+                            const redirect = this.$route.query.redirect ? this.$route.query.redirect : "/details";
+                            this.$router.replace({path: redirect});
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
             },
             /*注册*/
             register(params) {

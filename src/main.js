@@ -3,9 +3,9 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 import qs from 'qs'
-import {Notify, Toast} from 'vant'
-import { Col, Row, Field, Button, Form, Tab, Tabs, NavBar, Tabbar, TabbarItem, Icon, DropdownMenu, DropdownItem,
-  DatetimePicker, List, Cell, Grid, GridItem, NumberKeyboard, Popup } from 'vant';
+import {Notify, Toast, Dialog} from 'vant'
+import {Col, Row, Field, Button, Form, Tab, Tabs, NavBar, Tabbar, TabbarItem, Icon, DropdownMenu, DropdownItem,
+  DatetimePicker, List, Cell, Grid, GridItem, NumberKeyboard, Popup, Panel} from 'vant';
 import './assets/css/iconfont.css'
 
 Vue.config.productionTip = true;
@@ -16,6 +16,7 @@ Vue.prototype.$axios = axios;
 Vue.prototype.$qs = qs;
 Vue.prototype.$notify = Notify;
 Vue.prototype.$toast = Toast;
+Vue.prototype.$dialog = Dialog
 Vue.use(Col);
 Vue.use(Row);
 Vue.use(Field);
@@ -36,6 +37,7 @@ Vue.use(Grid);
 Vue.use(GridItem);
 Vue.use(NumberKeyboard);
 Vue.use(Popup);
+Vue.use(Panel);
 
 /*路由守卫 如果未登录则跳到/login*/
 router.beforeEach((to, from, next) => {
@@ -88,9 +90,19 @@ let store = {
   format(date) {
     let month = (date.getMonth() + 1).toString();
     month = month.length < 2 ? `0${month}` : month;
-    let day = date.getDay().toString();
-    day = day.length < 2 ? `0${date.getDay()}` : date.getDay();
+    let day = date.getDate().toString();
+    day = day.length < 2 ? `0${day}` : day;
     return `${date.getFullYear()}-${month}-${day}`;
+  },
+  formatChinaDate(date) {
+    if (typeof date !== typeof new Date())
+      return null;
+    let month = (date.getMonth() + 1).toString();
+    month = month.length < 2 ? `0${month}` : month;
+    let day = date.getDate().toString();
+    day = day.length < 2 ? `0${day}` : day;
+    let week = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+    return `${date.getFullYear()}年${month}月${day}日 ${week[date.getDay()]}`;
   }
 };
 Vue.prototype.$store = store;

@@ -1,7 +1,7 @@
 <template>
     <div>
         图表
-        <Tabbar></Tabbar>
+        <tabbar/>
     </div>
 </template>
 

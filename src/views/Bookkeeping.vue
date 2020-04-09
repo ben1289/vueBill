@@ -1,18 +1,7 @@
 <template>
     <div>
         <!--导航栏-->
-        <van-nav-bar
-                title="纯粹记账"
-                :border="false"
-                @click-left="onClickLeft"
-        >
-            <template #left>
-                <van-icon name="arrow-left" size="24px"/>
-            </template>
-            <template #title>
-                <img src="../assets/images/logo_long.png" style="padding-top: 10px;" alt="">
-            </template>
-        </van-nav-bar>
+        <nav-bar/>
 
         <van-tabs
                 style="height: inherit"
@@ -92,19 +81,35 @@
 </template>
 
 <script>
+    import NavBar from "@/components/NavBar";
+
     export default {
         name: "Bookkeeping",
+        components: {
+            NavBar
+        },
         data() {
             return  {
-                tabActive: 0,// 支出或收入页
-                selected: 0,// 选中的账单类型Id
-                amount: "",// 账单的金额
-                showKeyboard: false,// 是否显示数字键盘
-                showPopup: false,// 是否显示日期选择器
-                currentDate: new Date(),// 当前选中的日期
-                date: "今天",// 选择确定的日期
-                maxDate: new Date(),// 可选择最新日期
-                remark: "",// 备注
+                // 账单id
+                billId: 0,
+                // 支出或收入页
+                tabActive: 0,
+                // 选中的账单类型Id
+                selected: 0,
+                // 账单的金额
+                amount: "",
+                // 是否显示数字键盘
+                showKeyboard: false,
+                // 是否显示日期选择器
+                showPopup: false,
+                // 当前选中的日期
+                currentDate: new Date(),
+                // 选择确定的日期
+                date: "今天",
+                // 可选择最新日期
+                maxDate: new Date(),
+                // 备注
+                remark: "",
                 // 支出账单类型列表
                 expendCategories: [],
                 // 收入账单类型列表
@@ -114,18 +119,33 @@
         mounted() {
             /*设置账单类型*/
             this.$axios.get(`/category`)
-            .then(response => {
-                this.expendCategories = response.data["expend"];
-                this.incomeCategories = response.data["income"];
-            })
-            .catch(error => {
-                console.log(error);
-            });
+                .then(response => {
+                    this.expendCategories = response.data["expend"];
+                    this.incomeCategories = response.data["income"];
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            this.judge();
         },
         methods: {
-            /*返回页*/
-            onClickLeft() {
-                this.$router.go(-1);
+            /*判断是账单新增还是编辑*/
+            judge() {
+                let params = this.$route.params;
+                if (JSON.stringify(params) === "{}")
+                    return;
+                this.billId = params.billId ? params.billId : 0;
+                this.tabActive = params.categoryState ? params.categoryState : 0;
+                this.selected = params.categoryId ? params.categoryId : 0;
+                if (params.billAmount) {
+                    this.amount = params.billAmount;
+                    this.showKeyboard = true;
+                }
+                if (params.billTime) {
+                    this.currentDate = params.billTime;
+                    this.date = this.$store.format(this.currentDate);
+                }
+                this.remark = params.billRemark ? params.billRemark : "";
             },
             /*选中某个账单类型*/
             clickIconBox(categoryId) {
@@ -141,24 +161,30 @@
             /*数字键盘完成键*/
             confirmKeyboard() {
                 let params = {};
+                params.billId = this.billId !== 0 ? this.billId : '';
                 params.userId = this.$store.jsonParse(this.$store.state.user)["userId"];
                 params.categoryId = this.selected;
                 params.billAmount = this.tabActive === 0 ? parseInt(`-${this.amount}`) : parseInt(this.amount);
                 params.billTime = this.$store.format(this.currentDate);
                 params.billRemark = this.remark;
 
-                this.$axios.post("/bill", params, {
+                this.$axios({
+                    method: `POST`,
+                    url: params.billId ? '/modifyBill' : '/bill',
                     headers: {
                         'Content-Type': 'application/json;charset=UTF-8'
-                    }
+                    },
+                    data: params
                 })
-                .then(() => {
-                    this.$notify({type: 'primary', message: '记账成功😁'});
-                    this.$router.go(-1);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+                    .then(() => {
+                        params.billId
+                            ? this.$notify({type: 'primary', message: '修改成功😁'})
+                            : this.$notify({type: 'primary', message: '记账成功😁'});
+                        this.$router.go(-1);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
             },
             /*数字键盘删除键*/
             keyboardDelete() {
