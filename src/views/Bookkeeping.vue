@@ -164,7 +164,7 @@
                 params.billId = this.billId !== 0 ? this.billId : '';
                 params.userId = this.$store.jsonParse(this.$store.state.user)["userId"];
                 params.categoryId = this.selected;
-                params.billAmount = this.tabActive === 0 ? parseInt(`-${this.amount}`) : parseInt(this.amount);
+                params.billAmount = this.tabActive === 0 ? parseFloat(`-${this.amount}`) : parseFloat(this.amount);
                 params.billTime = this.$store.format(this.currentDate);
                 params.billRemark = this.remark;
 

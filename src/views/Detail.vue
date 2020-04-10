@@ -86,7 +86,17 @@
                     message: '确认删除这条账单？'
                 }).then(() => {
                     // on confirm
-                    // TODO：删除账单
+                    this.$axios.delete(`/bill/${this.billId}`)
+                        .then(response => {
+                            if (response.data === 1)
+                                this.$notify({type: 'primary', message: '删除成功！'});
+                            else
+                                this.$notify({type: 'warning', message: '删除失败！'});
+                            this.$router.go(-1);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
                 }).catch(() => {
                     // on cancel
                 });
