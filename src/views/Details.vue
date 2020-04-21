@@ -12,6 +12,7 @@
                         <van-datetime-picker
                                 v-model="currentDate"
                                 type="year-month"
+                                :min-date="minDate"
                                 :max-date="maxDate"
                                 :show-toolbar="false"
                                 :formatter="formatter"
@@ -19,8 +20,8 @@
                     </van-dropdown-item>
                 </van-dropdown-menu>
             </van-col>
-            <van-col span="8">{{amount["income"]}}</van-col>
-            <van-col span="8">{{amount["expend"]}}</van-col>
+            <van-col span="8">{{amount["income"] ? amount['income'] : '0'}}</van-col>
+            <van-col span="8">{{amount["expend"] ? amount['expend'] : '0'}}</van-col>
         </van-row>
         <van-row style="height: calc(100% - 102px)">
             <van-list style="height: 100%; overflow-y: auto;"
@@ -60,6 +61,7 @@
         data() {
             return {
                 currentDate: this.$store.state.currentDate, // 当前时间选择器选择的时间
+                minDate: new Date(), // 时间选择器可选最早日期
                 maxDate: new Date(), // 时间选择器可选最新日期
                 amount: {}, // 收入支出金额
                 lists: [], // 账单明细列表
@@ -95,6 +97,10 @@
                     })
                     .catch(error => {
                         console.log(error);
+                    });
+                this.$axios.get(`/getBillTime/${this.$store.jsonParse(this.$store.state.user)["userId"]}`)
+                    .then(response => {
+                        this.minDate = new Date(response.data.first);
                     });
             },
             /*单击账单明细*/
