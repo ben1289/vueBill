@@ -1,17 +1,18 @@
 <template>
     <div>
-        图表
+        <nav-bar/>
         <tabbar/>
     </div>
 </template>
 
 <script>
+    import NavBar from "@/components/NavBar";
     import Tabbar from "@/components/Tabbar";
 
     export default {
         name: "Chart",
         components: {
-            Tabbar
+            NavBar, Tabbar
         }
     }
 </script>

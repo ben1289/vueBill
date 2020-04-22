@@ -1,10 +1,6 @@
 <template>
     <div>
-        <van-nav-bar :border="false">
-            <template #title>
-                <img src="../assets/images/logo_long.png" style="padding-top: 10px;" alt="">
-            </template>
-        </van-nav-bar>
+        <nav-bar/>
         <van-divider>结余</van-divider>
         <van-row id="balance-box">
             <van-col span="8" offset="8" style="font-size: 28px">1239.00</van-col>
@@ -40,12 +36,13 @@
 </template>
 
 <script>
+    import NavBar from "@/components/NavBar";
     import Tabbar from "@/components/Tabbar";
 
     export default {
         name: "Bill",
         components: {
-            Tabbar
+            NavBar, Tabbar
         },
         data() {
             return {

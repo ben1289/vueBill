@@ -1,10 +1,9 @@
 <template>
     <van-nav-bar
-            title="纯粹记账"
             :border="false"
             @click-left="onClickLeft"
     >
-        <template #left>
+        <template #left v-if="goBack">
             <van-icon name="arrow-left" size="24px"/>
         </template>
         <template #title>
@@ -16,6 +15,12 @@
 <script>
     export default {
         name: "NavBar",
+        props: {
+            goBack: {
+                type: Boolean,
+                default: false
+            }
+        },
         methods: {
             onClickLeft() {
                 this.$router.go(-1);

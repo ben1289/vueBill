@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--导航栏-->
-        <nav-bar/>
+        <nav-bar :go-back="true"/>
 
         <van-tabs
                 style="height: inherit"

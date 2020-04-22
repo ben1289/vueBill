@@ -1,5 +1,6 @@
 <template>
     <div style="background-color: #f7f7f7;">
+        <nav-bar/>
         <van-row class="row-head-top">
             <van-col span="8">{{year}}</van-col>
             <van-col span="8">收入</van-col>
@@ -54,6 +55,7 @@
 </template>
 
 <script>
+    import NavBar from "@/components/NavBar";
     import Tabbar from "@/components/Tabbar";
 
     export default {
@@ -68,7 +70,7 @@
             }
         },
         components: {
-            Tabbar
+            NavBar, Tabbar
         },
         mounted() {
             this.getBills();

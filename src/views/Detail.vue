@@ -1,6 +1,6 @@
 <template>
     <div style="background-color: #F8F8F8">
-        <nav-bar/>
+        <nav-bar :go-back="true"/>
         <van-panel>
             <template #header>
                 <van-cell :title="categoryName" title-class="panel-header" size="large">
