@@ -5,7 +5,7 @@ import axios from 'axios'
 import qs from 'qs'
 import {Notify, Toast, Dialog} from 'vant'
 import {Col, Row, Field, Button, Form, Tab, Tabs, NavBar, Tabbar, TabbarItem, Icon, DropdownMenu, DropdownItem,
-  DatetimePicker, List, CellGroup, Cell, Grid, GridItem, NumberKeyboard, Popup, Panel, Picker, Divider} from 'vant';
+  DatetimePicker, List, CellGroup, Cell, Grid, GridItem, NumberKeyboard, Popup, Panel, Picker, Divider, Loading, Overlay} from 'vant';
 import './assets/css/iconfont.css'
 
 Vue.config.productionTip = true;
@@ -41,6 +41,8 @@ Vue.use(Popup);
 Vue.use(Panel);
 Vue.use(Picker);
 Vue.use(Divider);
+Vue.use(Loading);
+Vue.use(Overlay);
 
 /*路由守卫 如果未登录则跳到/login*/
 router.beforeEach((to, from, next) => {

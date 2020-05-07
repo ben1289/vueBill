@@ -17,4 +17,11 @@ export default {
   #app > div {
     height: 100%;
   }
+  .loading-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: transparent;
+  }
 </style>

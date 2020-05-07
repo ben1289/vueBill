@@ -24,8 +24,11 @@
             <van-col span="8">{{amount["income"] ? amount['income'] : '0'}}</van-col>
             <van-col span="8">{{amount["expend"] ? amount['expend'] : '0'}}</van-col>
         </van-row>
-        <van-row style="height: calc(100% - 102px)">
-            <van-list style="height: 100%; overflow-y: auto;"
+        <van-row style="height: calc(100% - 148px)">
+            <van-overlay :show="loading" class-name="loading-overlay">
+                <van-loading color="#1989fa" size="38px"/>
+            </van-overlay>
+            <van-list v-if="!loading" style="height: 100%; overflow-y: auto;"
                     :finished="true"
                     finished-text="没有更多了"
             >
@@ -67,6 +70,7 @@
                 maxDate: new Date(), // 时间选择器可选最新日期
                 amount: {}, // 收入支出金额
                 lists: [], // 账单明细列表
+                loading: true
             }
         },
         components: {
@@ -92,10 +96,12 @@
             },
             /*查询账单明细*/
             getBills() {
+                this.loading = true;
                 this.$axios.get(`/bill/${this.$store.jsonParse(this.$store.state.user)["userId"]}/${this.currentDate}`)
                     .then(response => {
                         this.amount = response.data.amount;
                         this.lists = response.data.list;
+                        this.loading = false;
                     })
                     .catch(error => {
                         console.log(error);
@@ -164,6 +170,9 @@
     }
     .cell-title {
         color: #969799;
+    }
+    .cell-title > .van-cell__value {
+        flex: 2;
     }
     .amount {
         width: 50%;
