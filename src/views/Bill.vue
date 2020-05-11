@@ -5,36 +5,34 @@
         <van-overlay :show="loading" class-name="loading-overlay">
             <van-loading color="#1989fa" size="38px"/>
         </van-overlay>
-        <div v-if="!loading">
-            <van-row id="balance-box">
-                <van-col span="8" offset="8" style="font-size: 28px">{{balanceTotal.toFixed(2)}}</van-col>
-                <van-col span="8">
-                    <van-dropdown-menu>
-                        <van-dropdown-item :title="currentYear + '年'" @close="dropdownItemClose" title-class="dropdown-title">
-                            <van-picker :columns="years" :default-index="years.length - 1" ref="yearPicker"/>
-                        </van-dropdown-item>
-                    </van-dropdown-menu>
-                </van-col>
-            </van-row>
-            <van-row>
-                <van-col span="12"><span class="title-span">收入</span><span class="value-span">{{income.toFixed(2)}}</span></van-col>
-                <van-col span="12"><span class="title-span">支出</span><span class="value-span">{{expend.toFixed(2)}}</span></van-col>
-            </van-row>
-            <van-cell-group>
-                <van-cell>
-                    <van-col span="6">月份</van-col>
-                    <van-col span="6">收入</van-col>
-                    <van-col span="6">支出</van-col>
-                    <van-col span="6">结余</van-col>
-                </van-cell>
-                <van-cell v-for="(balance, index) in balances" :key="index">
-                    <van-col span="6">{{balance['months']}}月</van-col>
-                    <van-col span="6">{{balance['income'].toFixed(2)}}</van-col>
-                    <van-col span="6">{{balance['expend'].toFixed(2)}}</van-col>
-                    <van-col span="6">{{balance['balance'].toFixed(2)}}</van-col>
-                </van-cell>
-            </van-cell-group>
-        </div>
+        <van-row id="balance-box">
+            <van-col span="8" offset="8" style="font-size: 28px">{{balanceTotal.toFixed(2)}}</van-col>
+            <van-col span="8">
+                <van-dropdown-menu>
+                    <van-dropdown-item :title="currentYear + '年'" @close="dropdownItemClose" title-class="dropdown-title">
+                        <van-picker :columns="years" :default-index="years.length - 1" ref="yearPicker"/>
+                    </van-dropdown-item>
+                </van-dropdown-menu>
+            </van-col>
+        </van-row>
+        <van-row>
+            <van-col span="12"><span class="title-span">收入</span><span class="value-span">{{income.toFixed(2)}}</span></van-col>
+            <van-col span="12"><span class="title-span">支出</span><span class="value-span">{{expend.toFixed(2)}}</span></van-col>
+        </van-row>
+        <van-cell-group>
+            <van-cell>
+                <van-col span="6">月份</van-col>
+                <van-col span="6">收入</van-col>
+                <van-col span="6">支出</van-col>
+                <van-col span="6">结余</van-col>
+            </van-cell>
+            <van-cell v-for="(balance, index) in balances" :key="index">
+                <van-col span="6">{{balance['months']}}月</van-col>
+                <van-col span="6">{{balance['income'].toFixed(2)}}</van-col>
+                <van-col span="6">{{balance['expend'].toFixed(2)}}</van-col>
+                <van-col span="6">{{balance['balance'].toFixed(2)}}</van-col>
+            </van-cell>
+        </van-cell-group>
 
         <tabbar/>
     </div>
