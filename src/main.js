@@ -7,6 +7,7 @@ import {Notify, Toast, Dialog} from 'vant'
 import {Col, Row, Field, Button, Form, Tab, Tabs, NavBar, Tabbar, TabbarItem, Icon, DropdownMenu, DropdownItem,
   DatetimePicker, List, CellGroup, Cell, Grid, GridItem, NumberKeyboard, Popup, Panel, Picker, Divider, Loading, Overlay} from 'vant';
 import './assets/css/iconfont.css'
+import VeLine from 'v-charts/lib/line.common.min'
 
 Vue.config.productionTip = true;
 
@@ -43,6 +44,7 @@ Vue.use(Picker);
 Vue.use(Divider);
 Vue.use(Loading);
 Vue.use(Overlay);
+Vue.component(VeLine.name, VeLine);
 
 /*路由守卫 如果未登录则跳到/login*/
 router.beforeEach((to, from, next) => {
