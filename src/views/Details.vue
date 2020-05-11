@@ -28,7 +28,7 @@
             <van-overlay :show="loading" class-name="loading-overlay">
                 <van-loading color="#1989fa" size="38px"/>
             </van-overlay>
-            <van-list v-if="!loading" style="height: 100%; overflow-y: auto;"
+            <van-list style="height: 100%; overflow-y: auto;"
                     :finished="true"
                     finished-text="没有更多了"
             >
