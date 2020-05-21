@@ -8,6 +8,8 @@ import {Col, Row, Field, Button, Form, Tab, Tabs, NavBar, Tabbar, TabbarItem, Ic
   DatetimePicker, List, CellGroup, Cell, Grid, GridItem, NumberKeyboard, Popup, Panel, Picker, Divider, Loading, Overlay} from 'vant';
 import './assets/css/iconfont.css'
 import VeLine from 'v-charts/lib/line.common.min'
+// 引用echarts模块文件是为了将echarts属性用在v-charts
+import 'echarts/lib/component/title'
 
 Vue.config.productionTip = true;
 

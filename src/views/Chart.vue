@@ -2,7 +2,8 @@
     <div>
         <nav-bar/>
         <div class="head">
-            <van-tabs type="card"
+            <van-tabs v-model="category"
+                      type="card"
                       color="#1989fa"
                       title-active-color="#eee"
                       title-inactive-color="#444"
@@ -30,7 +31,7 @@
                 height="300px"
                 :settings="chartSettings"
                 :data="chartData"
-                :init-options="chartOptions"
+                :title="chartOptions.title"
                 :legend-visible="false"
         />
         <tabbar/>
@@ -48,6 +49,9 @@
         },
         data() {
             return {
+                category: 0,
+                money: 1200,
+                average: 600,
                 chartSettings: {
                 },
                 chartData: {
@@ -63,10 +67,31 @@
                 },
                 chartOptions: {
                     title: {
-                        show: true,
-                        text: 'hello'
+                        text: ``,
+                        textAlign: 'left',
+                        padding: [15, 0, 0, 10],
+                        textStyle: {
+                            color: '#666',
+                            fontSize: 14,
+                            fontWeight: 'normal'
+                        }
                     }
                 }
+            }
+        },
+        watch: {
+            category(newValue) {
+                this.chartOptions.title.text =
+                    `${newValue == 0 ? "总支出" : "总收入"}：${this.money}\n平均值：${this.average}`;
+            }
+        },
+        mounted() {
+            this.initTitle();
+        },
+        methods: {
+            initTitle() {
+                this.chartOptions.title.text =
+                    `${this.category == 0 ? "总支出" : "总收入"}：${this.money}\n平均值：${this.average}`;
             }
         }
     }
