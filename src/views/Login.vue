@@ -4,7 +4,7 @@
             <template #title><img src="../assets/images/logo_long.png" style="padding-top: 20px;" alt=""></template>
         </van-nav-bar>
         <van-tabs
-                style="height: inherit"
+                style="height: calc(100% - 74px)"
                 v-model="active"
                 color="#6083B8"
                 title-active-color="#000"
@@ -244,6 +244,6 @@
         margin-bottom: 60px;
     }
     .van-tabs >>> .van-tabs__content {
-        height: inherit;
+        height: calc(100% - 104px);
     }
 </style>

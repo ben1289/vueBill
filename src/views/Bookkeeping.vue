@@ -4,7 +4,7 @@
         <nav-bar :go-back="true"/>
 
         <van-tabs
-                style="height: inherit"
+                style="height: calc(100% - 76px)"
                 v-model="tabActive"
                 type="card"
                 color="#1989fa"
@@ -213,7 +213,7 @@
 
 <style scoped>
     .van-nav-bar {
-        margin: 10px 0 20px 0;
+        padding: 10px 0 20px 0;
     }
     .van-nav-bar .van-icon,
     .van-nav-bar__text {
