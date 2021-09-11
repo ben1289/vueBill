@@ -1,9 +1,10 @@
 # 一个简单的记账WebApp
 ### 服务端：Java -> https://github.com/ben1289/bill
-![login](./src/assets/sample/login.png)
-![register](./src/assets/sample/register.png)
+![登录](./src/assets/sample/login.png)
+![注册](./src/assets/sample/register.png)
 ---
-![details](./src/assets/sample/details.png)
-![pay](./src/assets/sample/pay.png)
+![明细](./src/assets/sample/details.png)
+![查看](./src/assets/sample/view.png)
 ---
-![bill](./src/assets/sample/bill.png)
+![记账](./src/assets/sample/bookkeeping.png)
+![账单](./src/assets/sample/bill.png)
